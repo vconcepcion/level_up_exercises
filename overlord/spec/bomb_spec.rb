@@ -44,9 +44,9 @@ describe Bomb do
       expect(bomb).to be_inactive
     end
 
-    it 'lowers the number of remaining attempts by 1 if the wrong code is entered' do
+    it 'lowers the number of remaining attempts by 1 if the wrong deactivation code is entered' do
       expect { bomb.enter_code(wrong_code) }.
-        to change { bomb.num_attempts_remaining }.by(-1)
+        to change { bomb.attempts_remaining }.by(-1)
     end
 
     it 'remains active if the wrong deactivation code is entered twice' do
@@ -55,20 +55,19 @@ describe Bomb do
     end
 
     it 'explodes if the wrong deactivation code is entered three times' do
-      2.times { bomb.enter_code(wrong_code) }
       expect(bomb).to receive(:explode)
-      bomb.enter_code(wrong_code)
+      3.times { bomb.enter_code(wrong_code) }
     end
 
     context 'has exploded' do
       before { 3.times { bomb.enter_code(wrong_code) } }
 
-      it 'indicates it is out of service' do
+      it 'indicates it is out-of-service' do
         expect(bomb).to be_out_of_service
       end
 
       it 'does not accept any input' do
-        expect { bomb.enter_code(deactivation_code) }.to raise_error
+        expect { bomb.enter_code(deactivation_code) }.to raise_error(OutOfServiceError)
       end
     end
 
@@ -105,16 +104,16 @@ describe Bomb do
 
     ['foo', '1.234', '1234!'].each do |input|
       it "rejects the non-numeric input '#{input}'" do
-        expect { bomb.enter_code('foo') }.to raise_error
+        expect { bomb.enter_code('foo') }.to raise_error(InvalidInputError)
       end
     end
 
     it 'validates the configured activation code' do
-      expect { Bomb.new(activation_code: 'foo') }.to raise_error
+      expect { Bomb.new(activation_code: 'foo') }.to raise_error(InvalidInputError)
     end
 
     it 'validates the configured deactivation code' do
-      expect { Bomb.new(deactivation_code: 'foo') }.to raise_error
+      expect { Bomb.new(deactivation_code: 'foo') }.to raise_error(InvalidInputError)
     end
   end
 end

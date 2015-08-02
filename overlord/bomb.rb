@@ -1,5 +1,5 @@
 class Bomb
-  attr_reader :status, :num_attempts_remaining
+  attr_reader :status, :attempts_remaining
 
   MAX_ALLOWED_ATTEMPTS = 3
 
@@ -7,13 +7,13 @@ class Bomb
     [activation_code, deactivation_code].each { |c| validate_code(c) }
     @activation_code    = activation_code
     @deactivation_code  = deactivation_code
-    deactivate
+    reset
   end
 
   def enter_code(code)
-    raise "Out of service!!" if out_of_service?
-    @num_attempts_remaining -= 1 if active?
-    if @num_attempts_remaining <= 0
+    raise OutOfServiceError if out_of_service?
+    @attempts_remaining -= 1 if active?
+    if @attempts_remaining <= 0
       explode
     else
       process_attempt(code)
@@ -40,8 +40,9 @@ class Bomb
 
   def deactivate
     @status = :inactive
-    @num_attempts_remaining = MAX_ALLOWED_ATTEMPTS
+    @attempts_remaining = MAX_ALLOWED_ATTEMPTS
   end
+  alias_method :reset, :deactivate
 
   def explode
     @status = :out_of_service
@@ -58,6 +59,11 @@ class Bomb
   end
 
   def validate_code(code)
-    raise ArgumentError, "Code #{code} must be numeric." unless !!(/^\d+$/ =~ code)
+    unless !!(/^\d+$/ =~ code)
+      raise InvalidInputError, "Code '#{code}' must only include numeric characters."
+    end
   end
 end
+
+class InvalidInputError < StandardError; end
+class OutOfServiceError < RuntimeError; end
