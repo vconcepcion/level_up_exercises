@@ -63,8 +63,8 @@ describe Bomb do
     context 'has exploded' do
       before { 3.times { bomb.enter_code(wrong_code) } }
 
-      it 'indicates it is not in service' do
-        expect(bomb).not_to be_in_service
+      it 'indicates it is out of service' do
+        expect(bomb).to be_out_of_service
       end
 
       it 'does not accept any input' do

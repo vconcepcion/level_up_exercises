@@ -11,7 +11,7 @@ class Bomb
   end
 
   def enter_code(code)
-    raise "Not in service!!" unless in_service?
+    raise "Out of service!!" if out_of_service?
     @num_attempts_remaining -= 1 if active?
     if @num_attempts_remaining <= 0
       explode
@@ -25,11 +25,11 @@ class Bomb
   end
 
   def inactive?
-    !active?
+    @status == :inactive
   end
 
-  def in_service?
-    @status != :not_in_service
+  def out_of_service?
+    @status == :out_of_service
   end
 
   private
@@ -44,7 +44,7 @@ class Bomb
   end
 
   def explode
-    @status = :not_in_service
+    @status = :out_of_service
   end
 
   def process_attempt(code)
