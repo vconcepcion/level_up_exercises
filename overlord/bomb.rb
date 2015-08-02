@@ -1,7 +1,7 @@
 class Bomb
-  attr_reader :status
+  attr_reader :status, :num_attempts_remaining
 
-  ALLOWED_ATTEMPTS = 3
+  MAX_ALLOWED_ATTEMPTS = 3
 
   def initialize(activation_code: '1234', deactivation_code: '0000')
     [activation_code, deactivation_code].each { |c| validate_code(c) }
@@ -12,8 +12,8 @@ class Bomb
 
   def enter_code(code)
     raise "Not in service!!" unless in_service?
-    @num_attempts += 1 if active?
-    if @num_attempts >= ALLOWED_ATTEMPTS
+    @num_attempts_remaining -= 1 if active?
+    if @num_attempts_remaining <= 0
       explode
     else
       process_attempt(code)
@@ -40,7 +40,7 @@ class Bomb
 
   def deactivate
     @status = :inactive
-    @num_attempts = 0
+    @num_attempts_remaining = MAX_ALLOWED_ATTEMPTS
   end
 
   def explode

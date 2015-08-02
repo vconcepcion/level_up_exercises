@@ -44,6 +44,11 @@ describe Bomb do
       expect(bomb).to be_inactive
     end
 
+    it 'lowers the number of remaining attempts by 1 if the wrong code is entered' do
+      expect { bomb.enter_code(wrong_code) }.
+        to change { bomb.num_attempts_remaining }.by(-1)
+    end
+
     it 'remains active if the wrong deactivation code is entered twice' do
       expect { 2.times { bomb.enter_code(wrong_code) } }.
         not_to change { bomb.status }
