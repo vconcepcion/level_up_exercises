@@ -4,9 +4,8 @@ class Bomb
   MAX_ALLOWED_ATTEMPTS = 3
 
   def initialize(activation_code: '1234', deactivation_code: '0000')
-    [activation_code, deactivation_code].each { |c| validate_code(c) }
-    @activation_code    = activation_code
-    @deactivation_code  = deactivation_code
+    @activation_code    = validate_code(activation_code)
+    @deactivation_code  = validate_code(deactivation_code)
     reset
   end
 
@@ -34,6 +33,15 @@ class Bomb
 
   private
 
+  def process_attempt(code)
+    case validate_code(code)
+    when @activation_code
+      activate
+    when @deactivation_code
+      deactivate
+    end
+  end
+
   def activate
     @status = :active
   end
@@ -48,19 +56,10 @@ class Bomb
     @status = :out_of_service
   end
 
-  def process_attempt(code)
-    validate_code(code)
-    case code
-    when @activation_code
-      activate
-    when @deactivation_code
-      deactivate
-    end
-  end
-
   def validate_code(code)
-    unless !!(/^\d+$/ =~ code)
-      raise InvalidInputError, "Code '#{code}' must only include numeric characters."
+    code.tap do |c|
+      c.gsub!(/\s/, '')
+      raise InvalidInputError, "Code '#{c}' must only include numeric characters." unless !!(/^\d+$/ =~ c)
     end
   end
 end

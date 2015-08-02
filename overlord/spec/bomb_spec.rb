@@ -115,5 +115,9 @@ describe Bomb do
     it 'validates the configured deactivation code' do
       expect { Bomb.new(deactivation_code: 'foo') }.to raise_error(InvalidInputError)
     end
+
+    it 'ignores whitespace' do
+      expect { Bomb.new(activation_code: '12 34') }.not_to raise_error
+    end
   end
 end
