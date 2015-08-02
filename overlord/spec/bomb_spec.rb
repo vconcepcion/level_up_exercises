@@ -16,7 +16,7 @@ describe Bomb do
       expect(bomb).to be_active
     end
 
-    it 'remains inactive if the wrong activation code is entered' do
+    it 'is not activated if the wrong activation code is entered' do
       bomb.enter_code(wrong_code)
       expect(bomb).to be_inactive
     end
@@ -49,9 +49,9 @@ describe Bomb do
         to change { bomb.attempts_remaining }.by(-1)
     end
 
-    it 'remains active if the wrong deactivation code is entered twice' do
-      expect { 2.times { bomb.enter_code(wrong_code) } }.
-        not_to change { bomb.status }
+    it 'does not explode if the wrong deactivation code is entered twice' do
+      expect(bomb).not_to receive(:explode)
+      2.times { bomb.enter_code(wrong_code) }
     end
 
     it 'explodes if the wrong deactivation code is entered three times' do
@@ -59,7 +59,7 @@ describe Bomb do
       3.times { bomb.enter_code(wrong_code) }
     end
 
-    context 'has exploded' do
+    context 'after explosion' do
       before { 3.times { bomb.enter_code(wrong_code) } }
 
       it 'indicates it is out-of-service' do
@@ -71,27 +71,27 @@ describe Bomb do
       end
     end
 
-    context 'has been deactivated and reactivated' do
+    context 'after deactivation and reactivation' do
       before do
         bomb.enter_code(deactivation_code)
         bomb.enter_code(activation_code)
       end
 
-      it 'remains active if the wrong deactivation code is entered twice (resets number of attempts)' do
-        expect { 2.times { bomb.enter_code(wrong_code) } }.
-          not_to change { bomb.status }
+      it 'does not explode if the wrong deactivation code is entered twice (resets number of attempts)' do
+        expect(bomb).not_to receive(:explode)
+        2.times { bomb.enter_code(wrong_code) }
       end
     end
   end
 
   describe 'configuration' do
-    it 'has a default activation code of 1234' do
+    it "has a default activation code of '1234'" do
       bomb = Bomb.new
       bomb.enter_code('1234')
       expect(bomb).to be_active
     end
 
-    it 'has a default deactivation code of 0000' do
+    it "has a default deactivation code of '0000'" do
       bomb = Bomb.new(activation_code: '1234')
       bomb.enter_code('1234')
       bomb.enter_code('0000')
