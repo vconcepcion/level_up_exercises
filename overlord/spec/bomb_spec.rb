@@ -80,22 +80,7 @@ describe Bomb do
     end
   end
 
-  describe 'input validation' do
-    let(:activation_code)   { '4321' }
-    let(:deactivation_code) { '9999' }
-    let(:bomb) do
-      Bomb.new(activation_code:   activation_code,
-               deactivation_code: deactivation_code)
-    end
-
-    ['foo', '1.234', '1234!'].each do |input|
-      it "rejects the non-numeric input '#{input}'" do
-        expect { bomb.enter_code('foo') }.to raise_error
-      end
-    end
-  end
-
-  describe 'default configuration' do
+  describe 'configuration' do
     it 'has a default activation code of 1234' do
       bomb = Bomb.new
       bomb.enter_code('1234')
@@ -107,6 +92,24 @@ describe Bomb do
       bomb.enter_code('1234')
       bomb.enter_code('0000')
       expect(bomb).to be_inactive
+    end
+  end
+
+  describe 'input validation' do
+    let(:bomb) { Bomb.new }
+
+    ['foo', '1.234', '1234!'].each do |input|
+      it "rejects the non-numeric input '#{input}'" do
+        expect { bomb.enter_code('foo') }.to raise_error
+      end
+    end
+
+    it 'validates the configured activation code' do
+      expect { Bomb.new(activation_code: 'foo') }.to raise_error
+    end
+
+    it 'validates the configured deactivation code' do
+      expect { Bomb.new(deactivation_code: 'foo') }.to raise_error
     end
   end
 end

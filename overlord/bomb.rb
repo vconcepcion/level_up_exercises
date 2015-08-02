@@ -4,9 +4,10 @@ class Bomb
   ALLOWED_ATTEMPTS = 3
 
   def initialize(activation_code: '1234', deactivation_code: '0000')
+    [activation_code, deactivation_code].each { |c| validate_code(c) }
     @activation_code    = activation_code
     @deactivation_code  = deactivation_code
-    @num_attempts       = 0
+    deactivate
   end
 
   def enter_code(code)
@@ -47,7 +48,7 @@ class Bomb
   end
 
   def process_attempt(code)
-    raise "Code must be numeric." unless valid_code?(code)
+    validate_code(code)
     case code
     when @activation_code
       activate
@@ -56,7 +57,7 @@ class Bomb
     end
   end
 
-  def valid_code?(code)
-    !!(/^\d+$/ =~ code)
+  def validate_code(code)
+    raise ArgumentError, "Code #{code} must be numeric." unless !!(/^\d+$/ =~ code)
   end
 end
