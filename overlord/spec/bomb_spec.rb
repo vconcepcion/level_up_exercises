@@ -6,21 +6,6 @@ describe Bomb do
     expect(bomb).to be_inactive
   end
 
-  describe 'input validation' do
-    let(:activation_code)   { '4321' }
-    let(:deactivation_code) { '9999' }
-    let(:bomb) do
-      Bomb.new(activation_code:   activation_code,
-               deactivation_code: deactivation_code)
-    end
-
-    ['foo', '1.234', '1234!'].each do |input|
-      it "rejects the non-numeric input '#{input}'" do
-        expect { bomb.enter_code('foo') }.to raise_error
-      end
-    end
-  end
-
   describe 'activation' do
     let(:activation_code) { '4321' }
     let(:wrong_code)      { '1234' }
@@ -91,6 +76,21 @@ describe Bomb do
       it 'remains active if the wrong deactivation code is entered twice (resets number of attempts)' do
         expect { 2.times { bomb.enter_code(wrong_code) } }.
           not_to change { bomb.status }
+      end
+    end
+  end
+
+  describe 'input validation' do
+    let(:activation_code)   { '4321' }
+    let(:deactivation_code) { '9999' }
+    let(:bomb) do
+      Bomb.new(activation_code:   activation_code,
+               deactivation_code: deactivation_code)
+    end
+
+    ['foo', '1.234', '1234!'].each do |input|
+      it "rejects the non-numeric input '#{input}'" do
+        expect { bomb.enter_code('foo') }.to raise_error
       end
     end
   end
