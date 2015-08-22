@@ -58,7 +58,7 @@ If you see the above output, you're all set.
 ### Instructions
 Follow the steps below to get all the exercises in `spec/bomb_spec.rb` to pass. Do not proceed to the next exercise until all the previous ones have passed.
 
-####Exercise #1 - Red -> Green -> Refactor
+####Exercise #1 - Expectations
 Type the following command to run the test:
 ```
 rspec spec/bomb_spec.rb --tag exercise:1
@@ -78,7 +78,7 @@ Run the test. Notice that this test is pending and has not yet been implemented.
 ```
 Pending: (Failures listed here are expected and do not affect your suite's status)
 
-  1) Bomb activation is activated if the correct activation code is entered
+  1) Bomb when it is inactive is activated if the correct activation code is entered
      # Not yet implemented
      # ./spec/bomb_spec.rb:14
 

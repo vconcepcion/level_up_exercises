@@ -13,7 +13,7 @@ describe Bomb do
 
     it 'is activated if the correct activation code is entered', :practice => true, :exercise => 2
 
-    it 'does nothing if the correct activation code is entered again', :practice => true, :exercise => 3
+    it 'does not change status if the correct activation code is entered again', :practice => true, :exercise => 3
 
   end
 
