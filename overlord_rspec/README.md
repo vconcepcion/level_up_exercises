@@ -146,3 +146,6 @@ If written properly, the test should fail at first. Once you have the test faili
 
 ####Bonus
 Read up on some RSpec guidelines at [Better Specs](http://betterspecs.org). Try to apply some of these techniques to your tests.
+
+###Solution
+You may view a full solution on the [overlord_rspec](https://github.com/vconcepcion/level_up_exercises/tree/overlord_rspec/overlord_rspec) branch of this repo.
