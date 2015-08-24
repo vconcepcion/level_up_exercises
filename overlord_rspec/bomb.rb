@@ -3,7 +3,9 @@ class Bomb
 
   MAX_ALLOWED_ATTEMPTS = 3
 
-  def initialize(activation_code: '1234', deactivation_code: '0000')
+  def initialize(options = {})
+    activation_code     = options.fetch(:activation_code, '1234')
+    deactivation_code   = options.fetch(:deactivation_code, '0000')
     @activation_code    = validate_code(activation_code)
     @deactivation_code  = validate_code(deactivation_code)
     reset
