@@ -22,7 +22,7 @@ But, this is the important part: you're going to write the tests for the device 
 ### Getting Started
 
 Make sure you have the following installed:
-* [Ruby v1.9 or higher](https://www.ruby-lang.org/en/documentation/installation/)
+* [Ruby v2.0 or higher](https://www.ruby-lang.org/en/documentation/installation/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * RSpec - run `gem install rspec` to install
 * Text editor of your choice ([Sublime](http://www.sublimetext.com/2) is a good one)
