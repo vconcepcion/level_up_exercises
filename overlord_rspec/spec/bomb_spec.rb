@@ -1,29 +1,29 @@
 describe Bomb do
   it { is_expected.to be_inactive }
 
-  describe 'activation' do
+  context 'when it is inactive' do
     subject(:bomb)        { Bomb.new(activation_code: activation_code) }
     let(:activation_code) { '4321' }
     let(:wrong_code)      { '1234' }
-
-    it 'is activated if the correct activation code is entered' do
-      bomb.enter_code(activation_code)
-      expect(bomb).to be_active
-    end
 
     it 'is not activated if the wrong activation code is entered' do
       bomb.enter_code(wrong_code)
       expect(bomb).to be_inactive
     end
  
-    it 'does nothing if the correct activation code is entered again' do
+    it 'is activated if the correct activation code is entered' do
+      bomb.enter_code(activation_code)
+      expect(bomb).to be_active
+    end
+
+    it 'does not change status if the correct activation code is entered again' do
       bomb.enter_code(activation_code)
       expect { bomb.enter_code(activation_code) }.
         not_to change { bomb.status }
     end
   end
 
-  describe 'deactivation' do
+  context 'when it has been activated' do
     subject(:bomb) do
       Bomb.new(activation_code:   activation_code,
                deactivation_code: deactivation_code)
@@ -79,7 +79,7 @@ describe Bomb do
     end
   end
 
-  describe 'default configuration' do
+  context 'when it uses the default configuration' do
     subject(:bomb) { Bomb.new }
 
     it "has a default activation code of '1234'" do
