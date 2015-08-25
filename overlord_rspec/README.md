@@ -20,7 +20,6 @@ But, this is the important part: you're going to write the tests for the device 
   * Once a bomb has exploded, none of the buttons work anymore. Obv.
 
 ### Getting Started
-
 Make sure you have the following installed:
 * [Ruby v1.9 or higher](https://www.ruby-lang.org/en/documentation/installation/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -63,6 +62,8 @@ If you see the above output, you're all set.
 
 ### Instructions
 Follow the steps below to get all the exercises in `spec/bomb_spec.rb` to pass. Do not proceed to the next exercise until all the previous ones have passed.
+
+Download the [presentation](http://bit.ly/1KgpS39) for additional guidance.
 
 ####Exercise #1 - Expectations
 Type the following command to run the test:
