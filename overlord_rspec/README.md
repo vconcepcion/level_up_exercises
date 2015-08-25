@@ -29,7 +29,7 @@ Make sure you have the following installed:
 
 Clone this repository into a folder to download the RSpec exercises:
 ```
-git clone git@github.com:vconcepcion/level_up_exercises.git
+git clone https://github.com/vconcepcion/level_up_exercises.git
 ```
 
 Navigate to the overlord_rspec directory:
