@@ -1,0 +1,14 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+ruby "2.2.2"
+
+gem "sinatra"
+gem "cucumber"
+gem "cucumber-sinatra"
+gem "capybara"
+gem "haml"
+gem "pry"
+gem "rspec"
+gem "rspec-collection_matchers"
+gem "poltergeist"
