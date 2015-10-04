@@ -4,8 +4,6 @@ You've been contacted by a super villain in search of help. He says he has a gre
 
 One tricky problem is that bombs are quite expensive to debug in prod. To avoid an embarrassing dud, you're going to develop and test the bomb in the relative safety of your own workshop (desk, really). Thankfully, you've got requirements, so mostly this is just an exercise of translating those requirements into working tests and then writing the software to control the bomb. 
 
-But, this is the important part: you're going to write all the tests for the device before you write any of the app code. You cleverly realize that by writing the tests the way you'd like the code to work, you'll make your resulting code that much better. Well done, smartie.
-
 ### Requirements
 
 1. Even coffee machines have webservers these days. The bomb interface should be a Sinatra app, and the tests should be written in Cucumber and Rspec. A simple Sinatra base has been provided.
@@ -20,10 +18,68 @@ But, this is the important part: you're going to write all the tests for the dev
   * If a user puts in the wrong deactivation code three times, the bomb should explode. I'm not really sure what the interface would look like for this, since the bomb is exploded and all, but let's just indicate it somehow to be sure.
   * Once a bomb has exploded, none of the buttons work anymore. Obv.
 
+### Getting Started
+Make sure you have the following installed:
+* [Ruby v2.2.2](https://www.ruby-lang.org/en/documentation/installation/)
+* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* Bundler gem - run `gem install bundler` to install
+* Text editor of your choice ([Sublime](http://www.sublimetext.com/2) is a good one)
 
-### Super Optional Bonus Points
-* The super villain doesn't have much aesthetic sense, but you do, so go ahead and make the interface look awesome and malevolent.
-* Add a "confirm" button to the activation sequence. Once the activation code is entered, the user must confirm by pressing a big red button. Figure out what happens if you bail from the confirmation.
-* Add a timer. All good bombs have timers.
-* Add wires to snip to stop the bomb from detonating. This guy seems like he might not pay on time.
-* No bonus points for developing an actual electronic detonator. Still, dude, sweet.
+Clone this repository into a folder to download the Cucumber exercises:
+```
+git clone https://github.com/vconcepcion/level_up_exercises.git
+```
+
+Navigate to the overlord_cucumber directory:
+```
+cd level_up_exercises/overlord_cucumber
+```
+
+Install dependencies:
+```
+bundle install
+```
+
+Start the app:
+```
+ruby overlord.rb
+```
+
+You should get some output as follows:
+```
+[2015-10-03 22:07:38] INFO  WEBrick 1.3.1
+[2015-10-03 22:07:38] INFO  ruby 2.2.2 (2015-04-13) [x86_64-darwin14]
+== Sinatra/1.4.5 has taken the stage on 4567 for development with backup from WEBrick
+[2015-10-03 22:07:38] INFO  WEBrick::HTTPServer#start: pid=74461 port=4567
+```
+
+In a browser go to http://localhost:4567 (note: the port number in the URL will be specified in the above output but should default to 4567). If the app is properly up and running, you should see the following page.
+
+![Bomb Config Screen](/overlord_cucumber/img/bomb_config_screen.png)
+
+Back in terminal, run:
+```
+bundle exec cucumber features/test.feature
+```
+
+If run successfully, you should see the following output:
+```
+Feature: Test
+  As a meetup attendee
+  I want to verify that I can run Cucumber tests
+  So that I don't waste time installing stuff at the meetup
+
+  Scenario: Running a test                       # features/test.feature:6
+    Given I have followed the setup instructions # features/step_definitions/test_steps.rb:3
+    When I run this test                         # features/step_definitions/test_steps.rb:6
+    Then it should pass                          # features/step_definitions/test_steps.rb:9
+
+1 scenario (1 passed)
+3 steps (3 passed)
+```
+
+If you see the above output, you're all set.
+
+### Credit/Thanks
+Sinatra app written by Dan Kotowski - https://github.com/djkotowski
+
