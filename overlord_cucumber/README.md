@@ -20,7 +20,7 @@ One tricky problem is that bombs are quite expensive to debug in prod. To avoid 
 
 ### Getting Started
 Make sure you have the following installed:
-* [Ruby v2.2.2](https://www.ruby-lang.org/en/documentation/installation/)
+* [Ruby v2.2.2](https://www.ruby-lang.org/en/documentation/installation/) Note: The gems [ruby-install](https://github.com/postmodern/ruby-install) and [chruby](https://github.com/postmodern/chruby) are very helpful in managing Ruby versions. 
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * Bundler gem - run `gem install bundler` to install
 * Text editor of your choice ([Sublime](http://www.sublimetext.com/2) is a good one)
@@ -57,7 +57,7 @@ In a browser go to http://localhost:4567 (note: the port number in the URL will 
 
 ![Bomb Config Screen](/overlord_cucumber/img/bomb_config_screen.png)
 
-Back in terminal, run:
+Back in terminal (ctrl-c to quit the overlord app), run:
 ```
 bundle exec cucumber features/test.feature
 ```
