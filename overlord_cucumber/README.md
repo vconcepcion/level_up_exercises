@@ -17,7 +17,6 @@ One tricky problem is that bombs are quite expensive to debug in prod. To avoid 
   * Once the bomb is active, putting in the correct deactivation code should cause the bomb to revert to inactivity, and indicate as such.
   * If a user puts in the wrong deactivation code three times, the bomb should explode. I'm not really sure what the interface would look like for this, since the bomb is exploded and all, but let's just indicate it somehow to be sure.
   * Once a bomb has exploded, none of the buttons work anymore. Obv.
-
 ![Bomb Lifecycle](/overlord_cucumber/img/overlord_bomb.png)
 
 ### Getting Started
