@@ -10,12 +10,18 @@ Feature: Activation
   I want to activate a bomb
   So that I blow stuff up
 
-#I have the background written for you. And there are scenarios description as well. Lets think of how to write them
   Background: A bomb has been booted
     Given a bomb booted with the default codes
 
   @javascript @activating-bomb
-  Scenario: Successful activating the bomb
+  Scenario: Entering activation code and receiving prompt
+    When I enter the code 1234
+      And I should see the time prompt
+      And I enter the time 0400
+    Then the bomb should be activated
 
   @javascript @reactivating-bomb
-  Scenario: Entering activation code while bomb is active
+  Scenario: entering activation code while bomb is active
+    Given the bomb is already activated
+    When I enter the code 1234
+    Then I should see the message "INVALID CODE"

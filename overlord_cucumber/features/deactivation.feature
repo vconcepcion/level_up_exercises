@@ -5,15 +5,22 @@ Feature: Deactivation
   I want to deactivate the bomb
   So that I survive & dont die
 
-#bomb booted & activated can be written as part of the background
   Background:
+    Given a bomb booted with the default codes
+      And the bomb is already activated
 
-#Hint hint: there are 3 scenarios. Let's think.
-  @javascript 
-  Scenario:
+  @javascript @deactivating-with-valid-code
+  Scenario: Deactivating a bomb with a valid code
+    When I enter the code 0000
+    Then the bomb should be "INACTIVE"
 
-  @javascript
-  Scenario:
+  @javascript @deactivating-with-invalid-code
+  Scenario: Deactivating the bomb with an invalid code
+    When I enter the code 5678
+    Then I should see the message "INVALID CODE"
 
-  @javascript
-  Scenario:
+  @javascript @bomb-explosion
+  Scenario: Deactivating the bomb with an invalid code and 1 remaining attempt
+    Given 2 failed attempts have been made to disarm the bomb
+    When I enter the code 5678
+    Then the bomb should explode

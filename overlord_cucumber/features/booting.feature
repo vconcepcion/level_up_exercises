@@ -14,8 +14,6 @@
 #When (execute an action in the application under test) and
 #Then (assert the desired outcome)
 
-#REQUIREMENTS: When the super villain first boots the bomb, it should not be activated with or without codes.
-
 Feature: Booting the bomb
   As a super-villain
   I do not want to activate the bomb when I first boot it with or without codes
