@@ -81,6 +81,8 @@ Feature: Test
 
 If you see the above output, you're all set.
 
+Download the [presentation](/overlord_cucumber/docs/Testing with Cucumber.pdf) for additional guidance.
+
 ### Credit/Thanks
 Sinatra app written by Dan Kotowski - https://github.com/djkotowski
 
